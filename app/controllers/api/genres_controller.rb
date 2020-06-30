@@ -1,5 +1,5 @@
 class Api::GenresController < ApplicationController
-  before_action :set_genre, only: [:show, :update :destroy]
+    before_action :set_genre, only: [:show, :update, :destroy]
 
   def index
     render json: Genre.all
@@ -13,7 +13,7 @@ class Api::GenresController < ApplicationController
     genre = Genre.new(genre_params)
 
     if genre.save
-      render json:
+      render json: genre
     else
       render json: genre.errors, status: 422
     end
@@ -21,7 +21,7 @@ class Api::GenresController < ApplicationController
 
   def update
     if @genre.update(genre_params)
-      render json: @genre
+        render json: @genre
     else
       render json: genre.errors, status: 422
     end
@@ -31,12 +31,12 @@ class Api::GenresController < ApplicationController
     @genre.destroy
   end
 
-  private 
-  def set_genre 
-    @genre = Genre.find(params[:id])
-  end
+  private
+    def set_genre
+      @genre = Genre.find(params[:id])
+    end
 
-  def genre_params
-    params.require(:genre).permit(:name)
-  end
+    def genre_params
+      params.require(:genre).permit(:name)
+    end
 end
